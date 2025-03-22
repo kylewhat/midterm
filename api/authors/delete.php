@@ -24,7 +24,6 @@
   if($author->delete()) {
     echo json_encode(['id' => $author->id]);
   } else {
-    http_response_code(400);
     echo json_encode(
       array('error' => 'Author not deleted')
     );

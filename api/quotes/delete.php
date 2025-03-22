@@ -24,8 +24,7 @@
   if($quote->delete()) {
     echo json_encode(['id' => $quote->id]);
   } else {
-    http_response_code(400);
     echo json_encode(
-      array('error' => 'Quote not deleted')
+      array('message' => 'No Quotes Found')
     );
   }

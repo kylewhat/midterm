@@ -18,6 +18,7 @@
   $author->read_single();
 
   if(!$author->author){
+    echo json_encode(['message' => 'Author not found']);
     return;
   }
   // Create array

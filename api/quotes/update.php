@@ -28,8 +28,7 @@ Control<?php
       'category' => $quote->category
     ]);
   } else {
-    http_response_code(400);
     echo json_encode(
-      array('error' => 'Quote not updated')
+      array('message' => 'No Quotes Found')
     );
   }
