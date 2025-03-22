@@ -1,4 +1,4 @@
-Control<?php
+<?php
   // Headers
 
   include_once '../../config/Database.php';
@@ -29,6 +29,6 @@ Control<?php
     ]);
   } else {
     echo json_encode(
-      array('message' => 'No Quotes Found')
+      array('message' => 'Quote not updated')
     );
   }
