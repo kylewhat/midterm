@@ -18,7 +18,8 @@
   $category->read_single();
 
   if(!$category->category){
-    echo json_encode(['message' => 'Category not found.']);
+    echo json_encode(['message' => 'Category not found']);
+    return;
   }
   // Create array
   $category_arr = array(
