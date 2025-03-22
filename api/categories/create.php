@@ -16,12 +16,12 @@
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
-
-  $category->category = $data->category;
-  if(!$category->category){
+  if(!$data->category){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }
+  $category->category = $data->category;
+
   // Create Category
   if($category->create()) {
 

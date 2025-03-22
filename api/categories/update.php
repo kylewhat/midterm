@@ -17,11 +17,14 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
+  if(!$data->category || !$data->id){
+    echo json_encode(['message' => 'Missing Required Parameters']);
+    return;
+  }
   // Set ID to UPDATE
   $category->id = $data->id;
 
   $category->category = $data->category;
-
   // Update post
   if($category->update()) {
     echo json_encode([
