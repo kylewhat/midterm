@@ -26,7 +26,7 @@
 
   $author = new Author($db);
   $author->id = $data->author_id;
-  $authorResult = $author->read_single();
+  $author->read_single();
 
   if(!$author->author){
     echo json_encode(['message' => 'author_id Not Found']);
@@ -35,7 +35,7 @@
 
   $category = new Category($db);
   $category->id = $data->category_id;
-  $categoryResult = $category->read_single();
+  $category->read_single();
 
   if(!$category->category){
     echo json_encode(['message' => 'category_id Not Found']);
