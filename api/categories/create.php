@@ -16,7 +16,7 @@
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
-  if(!$data?->category){
+  if(!isset($data->category)){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }
