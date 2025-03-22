@@ -19,16 +19,20 @@
   $quote->author_id = $data->author_id;
   $quote->category_id = $data->category_id;
 
+  if(!$quote->id || $quote->quote || $quote->author_id || $quote->category_id){
+    echo json_encode(['message' => 'Missing Required Parameters']);
+    return;
+  }
   // Update post
   if($quote->update()) {
     echo json_encode([
       'id' => $quote->id,
       'quote' => $quote->quote,
-      'author' => $quote->author,
-      'category' => $quote->category
+      'author_id' => $quote->author_id,
+      'category_id' => $quote->category_id
     ]);
   } else {
     echo json_encode(
-      array('message' => 'Quote not updated')
+      array('message' => 'No Quotes Found')
     );
   }
