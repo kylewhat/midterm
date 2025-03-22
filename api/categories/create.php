@@ -18,7 +18,10 @@
   $data = json_decode(file_get_contents("php://input"));
 
   $category->category = $data->category;
-
+  if(!$category->category){
+    echo json_encode(['message' => 'Missing Required Parameters']);
+    return;
+  }
   // Create Category
   if($category->create()) {
 

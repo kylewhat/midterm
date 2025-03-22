@@ -20,7 +20,11 @@
   $quote->quote = $data->quote;
   $quote->author_id = $data->author_id;
   $quote->category_id = $data->category_id;
-
+  
+  if(!$quote->quote || !$quote->author_id || !$quote->category_id){
+    echo json_encode(['message' => 'Missing Required Parameters']);
+    return;
+  }
   // Create quote
   if($quote->create()) {
 

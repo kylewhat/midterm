@@ -19,7 +19,7 @@
   $quote->author_id = $data->author_id;
   $quote->category_id = $data->category_id;
 
-  if(!$quote->id || $quote->quote || $quote->author_id || $quote->category_id){
+  if(!$quote->id || !$quote->quote || !$quote->author_id || !$quote->category_id){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }
