@@ -33,7 +33,7 @@
   $category->id = $data->category_id;
   $categoryResult = $category->read_single();
 
-  if($categoryResult < 1){
+  if($category->category){
     echo json_encode(['message' => 'category_id Not Found']);
     return;
   }

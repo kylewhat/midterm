@@ -19,7 +19,7 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  if(!isset($data->id) || !isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)){
+  if(!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }
@@ -37,7 +37,7 @@
   $category->id = $data->category_id;
   $categoryResult = $category->read_single();
 
-  if($categoryResult < 1){
+  if(!$category->category){
     echo json_encode(['message' => 'category_id Not Found']);
     return;
   }
