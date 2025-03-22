@@ -16,7 +16,7 @@
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
-  if(!$data->author){
+  if(!$data?->author){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }

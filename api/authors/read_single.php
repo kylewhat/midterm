@@ -19,7 +19,7 @@
 
   if(!$author->author){
     echo json_encode(['message' => 'author_id Not Found']);
-    return;
+    return false;
   }
   // Create array
   $author_arr = array(

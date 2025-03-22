@@ -13,7 +13,7 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  if(!$data->id || !$data->quote || !$data->author_id || !$data->category_id){
+  if(!$data?->id || !$data?->quote || !$data?->author_id || !$data?->category_id){
     echo json_encode(['message' => 'Missing Required Parameters']);
     return;
   }
