@@ -58,8 +58,7 @@
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(!$row){
-        http_response_code(404);
-        echo json_encode(['error' => 'Author not found']);
+        echo json_encode(['message' => 'Author not found']);
         return;
       }
       // set properties

@@ -21,53 +21,54 @@
     public function read() {
       // Create query
       $query = 'SELECT
-        id,
-        quote,
-      FROM
-        ' . $this->table . '
-      ORDER BY
-        id DESC';
+        q.id,
+        q.quote,
+        a.author,
+        c.category
+      FROM ' . $this->table . ' AS q
+      JOIN 
+        categories AS c
+          ON c.id = q.category_id
+      JOIN 
+        authors AS a
+          ON a.id = q.author_id';
 
+      if($this->id || $this->author_id || $this->category_id){
+        $query .= " WHERE 1=1";
+
+        if($this->id){
+          $query .= " AND q.id = :quote_id";
+        }
+        if($this->author_id){
+          $query .= " AND a.id = :author_id";
+        }
+        if($this->category_id){
+          $query .= " AND c.id = :category_id";
+        }
+      }
+      
       // Prepare statement
       $stmt = $this->conn->prepare($query);
+      
+      $this->id = $this->id ? htmlspecialchars(strip_tags($this->id)) : null;
+      $this->author_id = $this->author_id ? htmlspecialchars(strip_tags($this->author_id)) : null;
+      $this->category_id = $this->category_id ? htmlspecialchars(strip_tags($this->category_id)) : null;
+    
+      // Bind data
+      if($this->id){
+        $stmt->bindParam(':quote_id', $this->id);
+      }
+      if($this->author_id){
+        $stmt->bindParam(':author_id', $this->author_id);
 
-      // Execute query
+      }
+      if($this->category_id){
+        $stmt->bindParam(':category_id', $this->category_id);
+      }
       $stmt->execute();
-
+      // Execute query
       return $stmt;
     }
-
-    // Get Single Quote
-  public function read_single(){
-    // Create query
-    $query = 'SELECT
-          id,
-          quote
-        FROM
-          ' . $this->table . '
-      WHERE id = ?
-      LIMIT 1';
-
-      //Prepare statement
-      $stmt = $this->conn->prepare($query);
-
-      // Bind ID
-      $stmt->bindParam(1, $this->id);
-
-      // Execute query
-      $stmt->execute();
-
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-      if(!$row){
-        http_response_code(404);
-        echo json_encode(['error' => 'Quote not found']);
-        return;
-      }
-      // set properties
-      $this->id = $row['id'];
-      $this->quote = $row['quote'];
-  }
 
   // Create Quote
   public function create() {
@@ -201,7 +202,6 @@
     }
   }
   return false;
-
   }
 
   // Delete Quote

@@ -58,8 +58,7 @@
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(!$row){
-        http_response_code(404);
-        echo json_encode(['error' => 'Category not found']);
+        echo json_encode(['message' => 'Category not found']);
         return;
       }
       // set properties

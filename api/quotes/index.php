@@ -11,12 +11,7 @@ switch($method){
         break; 
     
         case 'GET':
-            if(isset($_GET['id'])){
-                include 'read_single.php';
-            } else {
-                include 'read.php';
-            }
-
+            include 'read.php';
             $output = ob_get_clean();
             return $output;
             break;
